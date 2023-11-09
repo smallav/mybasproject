@@ -1,7 +1,17 @@
 <mvc:View controllerName="com.app.project.project1.controller.App"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:f = "sap.f">
     <App id="app">
+    <pages>
+    <f:FlexibleColumnLayout
+		autoFocus="false"
+		id="fcl"
+		stateChange="onStateChanged"
+		restoreFocusOnBackNavigation="true"
+		layout="{/layout}"
+		backgroundDesign="Translucent"/>
+    </pages>
     </App>
 </mvc:View>

@@ -14,7 +14,13 @@
       "id": "@sap/generator-fiori:basic",
       "version": "1.11.3",
       "toolsId": "751197cf-1fb1-4af4-b756-d7a3d4460ba2"
+    },
+    "dataSources": {
+      "productsModel" : {
+        "uri":"model/Products.json",
+        "type": "JSON"
     }
+  }
   },
   "sap.ui": {
     "technology": "UI5",
@@ -57,6 +63,10 @@
         "settings": {
           "bundleName": "com.app.project.project1.i18n.i18n"
         }
+      },
+      "products":{
+        "type": "sap.ui.model.json.JSONModel",
+        "dataSource": "productsModel"
       }
     },
     "resources": {
@@ -70,28 +80,44 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
+        "type": "View",
         "async": true,
         "viewPath": "com.app.project.project1.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "controlId": "fcl",
+        "transition":"slide",
+        "bypassed": {
+				}
       },
       "routes": [
         {
           "name": "RouteView1",
-          "pattern": ":?query:",
+          "pattern": ":layout:",
           "target": [
             "TargetView1"
           ]
-        }
+        },
+        {
+					"pattern": "detail/{product}/{layout}",
+					"name": "detail",
+					"target": [
+            "TargetView1",
+						"detail"
+					]
+				}
       ],
       "targets": {
         "TargetView1": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
           "viewId": "View1",
-          "viewName": "View1"
+          "viewName": "View1",
+          "controlAggregation": "beginColumnPages"
+        },
+        "detail":{
+          "viewId": "detail",
+          "viewName":"detail",
+          "viewType": "XML",
+          "controlAggregation": "midColumnPages"
         }
       }
     },
@@ -99,7 +125,7 @@
       "viewName": "com.app.project.project1.view.App",
       "type": "XML",
       "async": true,
-      "id": "App"
+      "id": "fcl"
     }
   }
 }

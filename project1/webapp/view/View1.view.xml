@@ -1,7 +1,52 @@
 <mvc:View controllerName="com.app.project.project1.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+    xmlns="sap.m" xmlns:f="sap.f">
+    	<f:DynamicPage id="dynamicPageId"
+				   toggleHeaderOnTitleClick="false">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle id="DynPageTitle">
+				<f:heading>
+					<Title id = "titleid" text="Products"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Content -->
+		<f:content>
+			<Table
+				id="productsTable"
+				mode="SingleSelectMaster"
+				itemPress="onListItemPress"
+				inset="false"
+				items="{
+					path: 'products>/ProductCollection'
+				}"
+				class="sapFDynamicPageAlignContent"
+				width="auto">
+				<columns>
+					<Column id="Productcol" width="12em">
+						<Text id ="Producttext" text="Product" />
+					</Column>
+					<Column id="pricecol"	hAlign="End">
+						<Text id="pricetext" text="Price" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem id="ColList" type="Navigation">
+						<cells>
+							<ObjectIdentifier id="ObjectIdentifier" title="{products>Name}" text="{products>ProductId}" />
+							<ObjectNumber id="ObjectNumber"
+									number="{
+										parts:[{path:'products>Price'},{path:'products>CurrencyCode'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+									unit="{products>CurrencyCode}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</f:content>
+        </f:DynamicPage>
 </mvc:View>
